@@ -55,3 +55,5 @@ public class WeatherApp {
         }
     }
 }
+
+Author : Sidar Ceylan - HNC Computing
