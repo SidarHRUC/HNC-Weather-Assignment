@@ -1,3 +1,6 @@
+// Version 1.2 - Code cleaned and checked
+
+
 /*
  * Weather Analysis Tool
  * calculates average temperature and searches for monthly data.
