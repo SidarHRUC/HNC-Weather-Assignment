@@ -1,9 +1,6 @@
-// Version 1.2 - Code cleaned and checked
-
-
 /*
- * Weather Analysis Tool
- * calculates average temperature and searches for monthly data.
+ * Weather Analysis Program
+ * Inputs data for 2 years and calculates averages
  */
 
 import java.util.Scanner;
@@ -11,49 +8,72 @@ import java.util.Scanner;
 public class WeatherApp {
 
     public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
         
-        // Initialize weather data arrays
+        // Arrays to store month names and temperature data
         String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", 
                            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
         
-        int[] temps = {8, 9, 12, 16, 18, 22, 24, 22, 20, 16, 12, 9};
+        int[] temps2023 = new int[12];
+        int[] temps2024 = new int[12];
 
-        System.out.println("--- LONDON WEATHER DATA 2023 ---");
+        System.out.println("--- WEATHER DATA ENTRY ---");
         
-        // Calculate the average temperature for the year
-        double total = 0;
-        
-        for (int i = 0; i < temps.length; i++) {
-            total = total + temps[i];
+        // Loop to get inputs for 2023
+        System.out.println("Enter temperatures for 2023:");
+        for (int i = 0; i < 12; i++) {
+            System.out.print("Temp for " + months[i] + ": ");
+            temps2023[i] = input.nextInt();
         }
         
-        double average = total / months.length;
+        // Loop to get inputs for 2024
+        System.out.println("\nEnter temperatures for 2024:");
+        for (int i = 0; i < 12; i++) {
+            System.out.print("Temp for " + months[i] + ": ");
+            temps2024[i] = input.nextInt();
+        }
+
+        // Display all data in a table
+        System.out.println("\n--- DATA TABLE ---");
+        System.out.println("Month \t 2023 \t 2024");
+        System.out.println("---------------------");
         
-        System.out.println("Annual Average: " + average + " Celsius");
+        for (int i = 0; i < 12; i++) {
+            System.out.println(months[i] + " \t " + temps2023[i] + " \t " + temps2024[i]);
+        }
+
+        // Calculate annual averages
+        double total2023 = 0;
+        double total2024 = 0;
         
+        for (int i = 0; i < 12; i++) {
+            total2023 = total2023 + temps2023[i];
+            total2024 = total2024 + temps2024[i];
+        }
         
-        // Search for specific month data based on user input
-        Scanner input = new Scanner(System.in);
-        System.out.println("\n--- MONTHLY SEARCH ---");
-        System.out.print("Enter month to search (e.g. Jan): ");
-        
+        System.out.println("\n--- AVERAGES ---");
+        System.out.println("2023 Average: " + (total2023 / 12));
+        System.out.println("2024 Average: " + (total2024 / 12));
+
+        // Search for a specific month
+        System.out.println("\n--- SEARCH ---");
+        System.out.print("Enter month (e.g. Aug): ");
         String search = input.next();
         boolean found = false;
         
-        // Iterate through months to find a match
-        for (int i = 0; i < months.length; i++) {
+        for (int i = 0; i < 12; i++) {
+            // Check if the current month matches the user input
             if (months[i].equalsIgnoreCase(search)) {
-                System.out.println("Found: " + months[i] + " was " + temps[i] + "C");
+                System.out.println("Results for " + months[i] + ":");
+                System.out.println("2023: " + temps2023[i]);
+                System.out.println("2024: " + temps2024[i]);
                 found = true;
-                break; // Stop loop once found
+                break; // Stop loop after finding the month
             }
         }
         
-        // Handle case where input does not match any month
         if (!found) {
-            System.out.println("Error: Month not found.");
+            System.out.println("Month not found.");
         }
     }
 }
-
-Author : Sidar Ceylan - HNC Computing
